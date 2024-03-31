@@ -14,7 +14,7 @@ except (IOError, EOFError) as e:
 
 @application.route('/')
 def fun():
-    return render_template('employee_churn3.html')
+    return render_template('index.html')
 
 @application.route('/prediction', methods=['POST'])
 def prediction():
