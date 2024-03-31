@@ -18,9 +18,7 @@ def fun():
 
 @application.route('/prediction', methods=['POST'])
 def prediction():
-@application.route('/prediction', methods=['POST'])
-def prediction():
-    if request.method == 'POST':  # Check if the request method is POST
+    if request.method == 'POST':
         data = request.form
         features = [[int(data["Age"]), int(data["DistanceFromHome"]),
                      int(data["EnvironmentSatisfaction"]), int(data["JobInvolvement"]), int(data["JobLevel"]),
@@ -32,10 +30,11 @@ def prediction():
                      int(data["YearsSinceLastPromotion"]), int(data["YearsWithCurrManager"])]]
 
         scaled_features = scaler.transform(features)
-        prediction = model.predict(scaled_features)  # Convert to percentage
+        prediction = model.predict(scaled_features)
         prediction_percentage = prediction * 100
         return render_template("index.html", prediction=prediction_percentage)
     else:
-        return "Method Not Allowed", 405  # Return 405 Method Not Allowed if the method is not POST
+        return "Method Not Allowed", 405
+
 if __name__ == "__main__":
     application.run(debug=True)
