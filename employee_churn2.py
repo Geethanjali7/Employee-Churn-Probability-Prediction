@@ -34,7 +34,7 @@ def prediction():
         scaled_features = scaler.transform(features)
         prediction = model.predict(scaled_features)  # Convert to percentage
         prediction_percentage = prediction * 100
-        return render_template("employee_churn3.html", prediction=prediction_percentage)
+        return render_template("index.html", prediction=prediction_percentage)
     else:
         return "Method Not Allowed", 405  # Return 405 Method Not Allowed if the method is not POST
 if __name__ == "__main__":
