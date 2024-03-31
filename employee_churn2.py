@@ -18,23 +18,19 @@ def fun():
 
 @application.route('/prediction', methods=['POST'])
 def prediction():
-    if request.method == 'POST':
-        data = request.form
-        features = [[int(data["Age"]), int(data["DistanceFromHome"]),
-                     int(data["EnvironmentSatisfaction"]), int(data["JobInvolvement"]), int(data["JobLevel"]),
-                     int(data["JobRole"]), int(data["JobSatisfaction"]), int(data["MonthlyIncome"]),
-                     int(data["NumCompaniesWorked"]), int(data["OverTime"]), int(data["PercentSalaryHike"]),
-                     int(data["PerformanceRating"]), int(data["RelationshipSatisfaction"]),
-                     int(data["StockOptionLevel"]), int(data["TotalWorkingYears"]), int(data["TrainingTimesLastYear"]),
-                     int(data["WorkLifeBalance"]), int(data["YearsAtCompany"]), int(data["YearsInCurrentRole"]),
-                     int(data["YearsSinceLastPromotion"]), int(data["YearsWithCurrManager"])]]
+    data = request.form
+    features = [[int(data["Age"]), int(data["DistanceFromHome"]),
+                 int(data["EnvironmentSatisfaction"]), int(data["JobInvolvement"]), int(data["JobLevel"]),
+                 int(data["JobRole"]), int(data["JobSatisfaction"]), int(data["MonthlyIncome"]),
+                 int(data["NumCompaniesWorked"]), int(data["OverTime"]), int(data["PercentSalaryHike"]),
+                 int(data["PerformanceRating"]), int(data["RelationshipSatisfaction"]),
+                 int(data["StockOptionLevel"]), int(data["TotalWorkingYears"]), int(data["TrainingTimesLastYear"]),
+                 int(data["WorkLifeBalance"]), int(data["YearsAtCompany"]), int(data["YearsInCurrentRole"]),
+                 int(data["YearsSinceLastPromotion"]), int(data["YearsWithCurrManager"])]]
 
-        scaled_features = scaler.transform(features)
-        prediction = model.predict(scaled_features)
-        prediction_percentage = prediction * 100
-        return render_template("index.html", prediction=prediction_percentage)
-    else:
-        return "Method Not Allowed", 405
-
+    scaled_features = scaler.transform(features)
+    prediction = model.predict(scaled_features) # Convert to percentage
+    prediction_percentage=prediction*100
+    return render_template("index.html", prediction=prediction_percentage)
 if __name__ == "__main__":
     application.run(debug=True)
